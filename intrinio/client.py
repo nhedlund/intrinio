@@ -1,4 +1,5 @@
 import os
+import logging
 import json
 import requests.sessions as sessions
 import pandas as pd
@@ -19,9 +20,10 @@ page_sizes = {
 
 api_base_url = 'https://api.intrinio.com'
 default_page_size = 250
+log = logging.getLogger(__name__)
 
 
-def get(endpoint: str, **parameters):
+def get(endpoint, **parameters):
     """
     Get complete dataset from an endpoint using optional query parameters.
 
@@ -45,7 +47,7 @@ def get(endpoint: str, **parameters):
         page_number += 1
 
 
-def get_page(endpoint: str, page_number=1, page_size=None, **parameters):
+def get_page(endpoint, page_number=1, page_size=None, **parameters):
     """
     Get a dataset page from an endpoint using optional query parameters.
 
@@ -60,12 +62,18 @@ def get_page(endpoint: str, page_number=1, page_size=None, **parameters):
         attribute
     """
     response = query(endpoint, page_number, page_size, **parameters)
-    page = pd.DataFrame(response['data'])
-    page.total_pages = response['total_pages']
+
+    if 'data' in response:
+        page = pd.DataFrame(response['data'])
+        page.total_pages = response['total_pages']
+    else:
+        page = pd.DataFrame([response])
+        page.total_pages = 1
+
     return page
 
 
-def query(endpoint: str, page_number=1, page_size=None, **parameters):
+def query(endpoint, page_number=1, page_size=None, **parameters):
     """
     Send a query request to Intrinio API for a dataset page including page
     count and other metadata using optional query parameters.
@@ -96,7 +104,7 @@ def query(endpoint: str, page_number=1, page_size=None, **parameters):
     return json.loads(response.content.decode('utf-8'))
 
 
-def get_page_size(endpoint: str):
+def get_page_size(endpoint):
     """
     Get page size for a specific endpoint.
 
