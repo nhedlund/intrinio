@@ -1,0 +1,9 @@
+requests
+pandas
+
+pytest
+pytest-catchlog
+pytest-cov
+pytest-watch
+tox
+detox
