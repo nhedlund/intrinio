@@ -81,3 +81,18 @@ def prices(identifier, start_date=None, end_date=None, frequency='daily',
     df.index = pd.DatetimeIndex(df.date)
     df.drop('date', axis=1, inplace=True)
     return df
+
+
+def news(identifier):
+    """
+    Get news for a company.
+
+    Args:
+        identifier: stock market ticker symbol associated with the company's
+            common stock. If the company is foreign, use the stock exchange
+            code, followed by a colon, then the ticker.
+
+    Returns:
+        Dataset as a Pandas DataFrame
+    """
+    return get('news', identifier=str.upper(identifier))

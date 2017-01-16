@@ -143,7 +143,7 @@ see Intrinio API documentation at: http://docs.intrinio.com/
     Get historical stock market prices or indices.
 
     Args:
-    
+
         identifier: Stock market symbol or index
         start_date: Start date of prices (default no filter)
         end_date: Last date (default today)
@@ -154,6 +154,19 @@ see Intrinio API documentation at: http://docs.intrinio.com/
     Returns:
         Dataset as a Pandas DataFrame
 
+* news(identifier):
+
+    Get news for a company.
+
+    Args:
+ 
+        identifier: stock market ticker symbol associated with the company's
+            common stock. If the company is foreign, use the stock exchange
+            code, followed by a colon, then the ticker.
+
+    Returns:
+        Dataset as a Pandas DataFrame
+ 
 ## Tests
 Run the tests using pytest in the root directory of the project:
 

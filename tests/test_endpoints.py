@@ -41,3 +41,9 @@ def test_endpoint_prices_with_identifier_and_ascending_order():
     assert 'date' not in df.columns
     assert len(df) > 500
     assert df.index[0] < df.index[1]
+
+
+def test_endpoint_news_with_identifier():
+    df = news('A')
+    assert len(df) > 200
+    assert df.summary.str.contains('Agilent', case=False).any()
