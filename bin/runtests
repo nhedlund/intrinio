@@ -8,4 +8,5 @@ py.test -rw --doctest-modules \
         --cov-report term-missing \
         --cov-report xml:tmp/coverage.xml \
         --cov-report html:tmp/coverage.html \
+        --ignore=setup.py \
         .

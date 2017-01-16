@@ -1,6 +1,4 @@
-.cache
-.idea
-.coverage*
+.*
 __pycache__
 *egg-info
 dist
