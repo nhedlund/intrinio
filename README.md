@@ -1,4 +1,7 @@
 # intrinio
+
+[![Build Status](https://travis-ci.org/nhedlund/intrinio.svg?branch=master)](https://travis-ci.org/nhedlund/intrinio)
+
 Unofficial Intrinio API client for Python.
 It gives easy access to financial data.
 
