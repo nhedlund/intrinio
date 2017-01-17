@@ -1,4 +1,0 @@
-#!/bin/bash
-
-echo 'Setting pre-commit: bin/update-version'
-ln -s -f ../../bin/update-version .git/hooks/pre-commit

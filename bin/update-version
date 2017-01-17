@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Fetch and increment the build number
-buildnumber=`git rev-list HEAD --count`
-((buildnumber++))
-
-# Update build in VERSION file
-sed -i "s/\.[0-9]*$/.$buildnumber/" VERSION.txt
-git add VERSION.txt
