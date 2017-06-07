@@ -18,8 +18,8 @@ intrinio package:
 
 ```python
 import intrinio
-intrinio.username = 'USERNAME_FROM_INTRINIO'
-intrinio.password = 'PASSWORD_FROM_INTRINIO'
+intrinio.client.username = 'USERNAME_FROM_INTRINIO'
+intrinio.client.password = 'PASSWORD_FROM_INTRINIO'
 ```
 
 Or by setting the system environment variables:
