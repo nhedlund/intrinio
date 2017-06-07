@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.1.16 - 2017-06-07
+
+* Fix authentication instructions in README
+
+
 ## 0.1.15 - 2017-02-05
 
 * Fix ImportError of pypandoc
