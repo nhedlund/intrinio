@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.1.17 - 2017-09-28
+
+* Add endpoints: financials and fundamentals
+
+
 ## 0.1.16 - 2017-06-07
 
 * Fix authentication instructions in README

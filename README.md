@@ -35,6 +35,14 @@ import intrinio
 intrinio.prices('AAPL', start_date='2016-01-01')
 ```
 
+Get yearly fundamentals including PE ratio, net debt, total capital and
+over 100 other variables for Apple:
+
+```python
+import intrinio
+intrinio.financials('AAPL')
+```
+
 Get company information about Google:
 
 ```python
@@ -166,7 +174,62 @@ see Intrinio API documentation at: http://docs.intrinio.com/
 
     Returns:
         Dataset as a Pandas DataFrame
+        
+
+* financials(identifier, type='FY', statement='calculations'):
+
+    Get standardized fundamental data for a company.
+
+    Args:
+    
+        identifier: stock market ticker symbol associated with the company's
+            common stock. If the company is foreign, use the stock exchange
+            code, followed by a colon, then the ticker.
+        type: Period type: FY (default) | QTR | TTM | YTD
+        statement: Type of fundamental data: calculations (default) |
+            income_statement | balance_sheet | cash_flow_statement
+
+    Returns:
+        Dataset as a Pandas DataFrame
  
+ 
+* financials_period(identifier, fiscal_year, fiscal_period='FY',
+                      statement='calculations'):
+                      
+    Get standardized fundamental data for a single period for a company.
+
+    Args:
+    
+        fiscal_year: Year
+        fiscal_period: FY (default) | Q1 | Q2 | Q3 | Q4 | Q1TTM | Q2TTM | Q3TTM
+            | Q2YTD | Q3YTD
+        identifier: stock market ticker symbol associated with the company's
+            common stock. If the company is foreign, use the stock exchange
+            code, followed by a colon, then the ticker.
+        statement: Type of fundamental data: calculations (default) |
+            income_statement | balance_sheet | cash_flow_statement
+
+    Returns:
+        Dataset as a Pandas DataFrame
+
+
+* fundamentals(identifier, type='FY', statement='calculations'):
+
+    Get available periods with standardized fundamental data for a company.
+
+    Args:
+    
+        identifier: stock market ticker symbol associated with the company's
+            common stock. If the company is foreign, use the stock exchange
+            code, followed by a colon, then the ticker.
+        type: Period type: FY (default) | QTR | TTM | YTD
+        statement: Type of fundamental data: calculations (default) |
+            income_statement | balance_sheet | cash_flow_statement
+
+    Returns:
+        Dataset as a Pandas DataFrame
+
+
 ## Tests
 Run the tests using pytest in the root directory of the project:
 
