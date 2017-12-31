@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 0.1.18 - 2017-12-31
+
+* Fix retrieving financials using TTM
+
+
 ## 0.1.17 - 2017-09-28
 
 * Add endpoints: financials and fundamentals
