@@ -145,6 +145,10 @@ def financials(identifier, type='FY', statement='calculations'):
     for fiscal_year, fiscal_period in years_and_periods:
         period = financials_period(identifier, fiscal_year, fiscal_period,
                                    statement)
+
+        if type == 'TTM' and fiscal_period == 'FY':
+            period.index = pd.MultiIndex.from_tuples([(fiscal_year, 'Q4TTM')],
+                                                     names=['year', 'period'])
         if r is None:
             r = period
         else:
