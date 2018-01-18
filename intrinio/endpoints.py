@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from intrinio.client import get
 
 
@@ -180,12 +181,15 @@ def financials_period(identifier, fiscal_year, fiscal_period='FY',
     fiscal_period = fiscal_period.upper()
     statement = statement.lower()
 
+    if isinstance(fiscal_year, np.generic):
+        fiscal_year = np.asscalar(fiscal_year)
+
     if fiscal_period == 'FY':
         index = [fiscal_year]
     else:
         index = pd.MultiIndex.from_tuples([(fiscal_year, fiscal_period)],
                                           names=['year', 'period'])
-
+                                        
     r = get('financials/standardized',
             identifier=identifier,
             statement=statement,

@@ -1,5 +1,7 @@
 # Changelog
 
+* Add disk cache to minimize API usage for tests.
+
 
 ## 0.1.18 - 2017-12-31
 

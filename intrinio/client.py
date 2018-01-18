@@ -1,11 +1,17 @@
+"""Get datasets from Intrinio API, either complete or one page at a time."""
 import os
 import logging
 import json
 import requests.sessions as sessions
 import pandas as pd
+import hashlib
+import time
 
 username = os.getenv('INTRINIO_USERNAME')
 password = os.getenv('INTRINIO_PASSWORD')
+cache_enabled = (os.getenv('INTRINIO_CACHE', 'false') == 'true')
+cache_directory = os.path.expanduser('~/.cache/intrinio')
+cache_max_age = 3600 * 8
 
 page_sizes = {
     'prices': 50000,
@@ -61,7 +67,7 @@ def get_page(endpoint, page_number=1, page_size=None, **parameters):
         Dataset page as a Pandas DataFrame with an additional total_pages
         attribute
     """
-    response = query(endpoint, page_number, page_size, **parameters)
+    response = _query(endpoint, page_number, page_size, **parameters)
 
     if 'data' in response:
         page = pd.DataFrame(response['data'])
@@ -73,7 +79,7 @@ def get_page(endpoint, page_number=1, page_size=None, **parameters):
     return page
 
 
-def query(endpoint, page_number=1, page_size=None, **parameters):
+def _query(endpoint, page_number=1, page_size=None, **parameters):
     """
     Send a query request to Intrinio API for a dataset page including page
     count and other metadata using optional query parameters.
@@ -93,6 +99,26 @@ def query(endpoint, page_number=1, page_size=None, **parameters):
     url = '{}/{}'.format(api_base_url, endpoint)
     parameters['page_number'] = page_number
     parameters['page_size'] = page_size
+
+    if cache_enabled:
+        response = _web_request_cached(url, parameters)
+    else:
+        response = _web_request(url, parameters)
+
+    return json.loads(response)
+
+
+def _web_request(url, parameters):
+    """
+    Perform HTTP GET request and return response.
+
+    Args:
+        url: Absolute URL
+        parameters: URL parameters
+
+    Returns:
+        Response as a string
+    """
     auth = (username, password)
 
     with sessions.Session() as session:
@@ -101,7 +127,41 @@ def query(endpoint, page_number=1, page_size=None, **parameters):
     if not response.ok:
         response.raise_for_status()
 
-    return json.loads(response.content.decode('utf-8'))
+    return response.content.decode('utf-8')
+
+
+def _web_request_cached(url, parameters):
+    """
+    Return cached response if available and not too old, otherwise
+    perform HTTP GET request and cache and return response.
+
+    Args:
+        url: Absolute URL
+        parameters: URL parameters
+
+    Returns:
+        Response as a string
+    """
+    content_id = (url + json.dumps(parameters)).encode('utf-8')
+    content_key = hashlib.sha256(content_id).hexdigest()
+    cache_file_path = os.path.join(cache_directory, content_key + '.txt')
+
+    if os.path.exists(cache_file_path):
+        age = time.time() - os.path.getctime(cache_file_path)
+
+        if age <= cache_max_age:
+            with open(cache_file_path, 'r') as cached_response:
+                return cached_response.read()
+
+    response = _web_request(url, parameters)
+
+    if not os.path.exists(cache_directory):
+        os.makedirs(cache_directory)
+    
+    with open(cache_file_path, 'w') as cached_response:
+        cached_response.write(response)
+
+    return response
 
 
 def get_page_size(endpoint):

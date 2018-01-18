@@ -1,5 +1,7 @@
+import intrinio
 from intrinio.endpoints import *
 
+intrinio.client.cache_enabled = True
 
 def test_endpoint_companies_with_query():
     df = companies(query='Bank')

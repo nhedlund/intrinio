@@ -1,9 +1,12 @@
 import pandas as pd
 import pytest
+import intrinio
 from requests import HTTPError
 
-from intrinio.client import get, get_page, query, get_page_size
+from intrinio.client import get, get_page, _query, _web_request, \
+    _web_request_cached, get_page_size
 
+intrinio.client.cache_enabled = True
 
 def test_get_companies_data_with_query():
     companies = get('companies', query='Cola')
@@ -30,7 +33,7 @@ def test_get_first_page_of_companies_data():
 
 
 def test_query_companies():
-    response = query('companies')
+    response = _query('companies')
     assert isinstance(response, dict)
     assert 'result_count' in response
     assert 'page_size' in response
@@ -49,6 +52,16 @@ def test_query_companies():
 def test_get_missing_endpoint():
     with pytest.raises(HTTPError):
         get('missing_endpoint')
+
+
+def test_query_search_engine():
+    response = _web_request('https://duckduckgo.com', {'q': 'summer'})
+    assert 'summer' in response
+
+
+def test_query_search_engine_cached():
+    response = _web_request_cached('https://duckduckgo.com', {'q': 'summer'})
+    assert 'summer' in response
 
 
 def test_get_page_size_with_defined_endpoint():
