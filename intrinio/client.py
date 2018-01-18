@@ -6,6 +6,7 @@ import requests.sessions as sessions
 import pandas as pd
 import hashlib
 import time
+import codecs
 
 username = os.getenv('INTRINIO_USERNAME')
 password = os.getenv('INTRINIO_PASSWORD')
@@ -150,7 +151,7 @@ def _web_request_cached(url, parameters):
         age = time.time() - os.path.getctime(cache_file_path)
 
         if age <= cache_max_age:
-            with open(cache_file_path, 'r') as cached_response:
+            with codecs.open(cache_file_path, 'r', 'utf-8') as cached_response:
                 return cached_response.read()
 
     response = _web_request(url, parameters)
@@ -158,7 +159,7 @@ def _web_request_cached(url, parameters):
     if not os.path.exists(cache_directory):
         os.makedirs(cache_directory)
     
-    with open(cache_file_path, 'w') as cached_response:
+    with codecs.open(cache_file_path, 'w', 'utf-8') as cached_response:
         cached_response.write(response)
 
     return response
