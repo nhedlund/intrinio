@@ -2,6 +2,7 @@
 
 * Add stock screener endpoint: screener
 * Add disk cache to minimize API usage for tests.
+* Fix error when total pages are not available in API response
 
 
 ## 0.1.18 - 2017-12-31

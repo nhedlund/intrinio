@@ -72,7 +72,7 @@ def get_page(endpoint, page_number=1, page_size=None, **parameters):
 
     if 'data' in response:
         page = pd.DataFrame(response['data'])
-        page.total_pages = response['total_pages']
+        page.total_pages = response.get('total_pages', 1)
     else:
         page = pd.DataFrame([response])
         page.total_pages = 1
