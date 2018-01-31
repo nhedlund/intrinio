@@ -255,7 +255,7 @@ see Intrinio API documentation at: http://docs.intrinio.com/
         logic: How the conditions are applied using AND by default
 
     Returns:
-        List of tickers that meet the conditions
+        List of tickers that meet the conditions as a Pandas DataFrame
 
 
 ## Tests

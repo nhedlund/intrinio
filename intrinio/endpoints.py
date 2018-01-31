@@ -223,7 +223,7 @@ def screener(conditions, order_column=None, order_direction=None,
         logic: How the conditions are applied using AND by default
 
     Returns:
-        List of tickers that meet the conditions
+        List of tickers that meet the conditions as a Pandas DataFrame
     """
     return get('securities/search',
                conditions=conditions,
