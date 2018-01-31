@@ -1,5 +1,6 @@
 # Changelog
 
+* Add stock screener endpoint: screener
 * Add disk cache to minimize API usage for tests.
 
 

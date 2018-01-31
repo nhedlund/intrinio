@@ -74,3 +74,11 @@ def test_endpoint_financials_period_with_first_quarter():
     assert len(df) == 1
     assert df.ebit[0] > 2000000
     assert df.ebit[0] < 3000000
+
+
+def test_endpoint_screener():
+    df = screener('pricetoearnings~gt~5')
+    assert len(df) >= 100
+    assert (df.pricetoearnings >= 10).any()
+    assert not (df.pricetoearnings < 5).any()
+    assert (df.ticker == 'AAPL').any()
