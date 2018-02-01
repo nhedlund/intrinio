@@ -78,10 +78,10 @@ that retrieves all data with optional parameters to filter the data. They
 might also do some data conversion like for example the prices endpoint
 where the date column is used as the index for the Pandas DataFrame.
 
-### Low level functions
-
 For more information about available endpoints and their parameters,
-see Intrinio API documentation at: http://docs.intrinio.com/
+see Intrinio API documentation at: [Intrinio Docs](http://docs.intrinio.com/)
+
+### Low level functions
 
 * get(endpoint, **parameters):
 
@@ -111,7 +111,6 @@ see Intrinio API documentation at: http://docs.intrinio.com/
         attribute
 
 ### High level functions
-
 
 * companies(identifier=None, query=None):
 
@@ -183,7 +182,6 @@ see Intrinio API documentation at: http://docs.intrinio.com/
     Returns:
         Dataset as a Pandas DataFrame
 
-
 * financials(identifier, type='FY', statement='calculations'):
 
     Get standardized fundamental data for a company.
@@ -199,7 +197,6 @@ see Intrinio API documentation at: http://docs.intrinio.com/
 
     Returns:
         Dataset as a Pandas DataFrame
-
 
 * financials_period(identifier, fiscal_year, fiscal_period='FY',
                       statement='calculations'):
@@ -220,7 +217,6 @@ see Intrinio API documentation at: http://docs.intrinio.com/
     Returns:
         Dataset as a Pandas DataFrame
 
-
 * fundamentals(identifier, type='FY', statement='calculations'):
 
     Get available periods with standardized fundamental data for a company.
@@ -236,7 +232,6 @@ see Intrinio API documentation at: http://docs.intrinio.com/
 
     Returns:
         Dataset as a Pandas DataFrame
-
 
 * screener(conditions, order_column=None, order_direction=None,
              primary_only=None, logic=None):
@@ -257,7 +252,6 @@ see Intrinio API documentation at: http://docs.intrinio.com/
     Returns:
         List of tickers that meet the conditions as a Pandas DataFrame
 
-
 ## Tests
 
 The tests will cache API requests in ~/.cache/intrinio to make the tests go
@@ -277,10 +271,9 @@ Or run the runtests script to also generate a coverage report
 bin/runtests
 ```
 
-
 ## Version history
 
-* 0.1: Initial version
+* See CHANGELOG.md
 
 ## License
 
