@@ -9,13 +9,4 @@ cache:
   - $HOME/.cache/intrinio
 install: pip install -r requirements.txt
 script: bin/runtests
-deploy:
-  provider: pypi
-  user: nhedlund
-  password:
-    secure: YM+lOljjYx03sYvU1qqgGLSWvIi46wbCSNXW0u1nQVxmPs0fako6PEBnNBXp4rEF1dUXRgvJOo4RCsvfaJwtemaX7/IPgmT+NglYVbOLi17AdElVy0k60msGOKMylviT4qXhD30UWnCEMA16va5WTCbXF/XkF2BMJH6wl2e/WBEvAi7et7uAzZwHkCttqNGv0e7mDqpfslNfanV+txptRRfu0HdSj/AK4/3w+B5I0eEyEtZyA6tzHWJh8HfoxsDCu0zjRlEUqQHeKFLZP84sqdJwbRmzmHztj1efChQlsnEtlNuVY+Ql8R2Nz0kUsASCYDZGTU6cQ6jmDFPuOP9h6qGWCa5OzqegK43ODB+zUgU44oaT4WiFalkCglGwxsol2hpWnypFhFIZNYkAhzk2Pdz40EZP2DQuFtZuvrzFlWKYgyNDC1UbSX5kBkDr9Qi4DPzeRmisq+4TFJtGeP7CuKNNbf55PcsbWHiTaTXDZW1Pq63WFJxYnRwYYwkid4Hrml3uFo+4sUyhmIJZFztN8oqxTnvbkQGerZVyymO1cZvhzAnlL1kaVioi72+jy00GTq62zOwUqd9RfXG5gbNCgUtACiXzZ9f5itrU4kfUKFb2Bq/NGrZz14kysDMQDWpIctndVWqhqPmgXM2kKr3OLoXNDAfAYB/WcnbfwDSQRXQ=
-  distributions: sdist bdist_wheel
-  on:
-    tags: true
-    repo: nhedlund/intrinio
-    python: 2.7
+
