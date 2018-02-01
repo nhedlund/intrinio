@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from intrinio.client import get
 
 
@@ -47,7 +46,6 @@ def indices(identifier=None, query=None, type=None):
         identifier: Intrinio symbol associated with the index
         query: Search of index name or symbol
         type: Type of indices: stock_market | economic | sic
-
     Returns:
         Dataset as a Pandas DataFrame
     """
@@ -167,10 +165,6 @@ def financials(identifier, type='FY', statement='calculations'):
     for fiscal_year, fiscal_period in years_and_periods:
         period = financials_period(identifier, fiscal_year, fiscal_period,
                                    statement)
-
-        if type == 'TTM' and fiscal_period == 'FY':
-            period.index = pd.MultiIndex.from_tuples([(fiscal_year, 'Q4TTM')],
-                                                     names=['year', 'period'])
         if r is None:
             r = period
         else:
@@ -202,9 +196,6 @@ def financials_period(identifier, fiscal_year, fiscal_period='FY',
     fiscal_period = fiscal_period.upper()
     statement = statement.lower()
 
-    if isinstance(fiscal_year, np.generic):
-        fiscal_year = np.asscalar(fiscal_year)
-
     if fiscal_period == 'FY':
         index = [fiscal_year]
     else:
@@ -225,32 +216,6 @@ def financials_period(identifier, fiscal_year, fiscal_period='FY',
         r.index.name = 'year'
 
     return r
-
-
-def screener(conditions, order_column=None, order_direction=None,
-             primary_only=None, logic=None):
-    """
-    Find securities that meet a list of conditions.
-
-    Args:
-        conditions: Comma-separated list of conditions. Each condition
-            consists of three or four elements separated by tildes (~):
-            Data_tag~Operator~Value~Label(Optional)
-        order_column: A data tag by which to order the results
-        order_direction: Order of the results: asc (default) | desc
-        primary_only: Return only primary securities (excluding special
-            securities such as preferred shares)
-        logic: How the conditions are applied using AND by default
-
-    Returns:
-        List of tickers that meet the conditions as a Pandas DataFrame
-    """
-    return get('securities/search',
-               conditions=conditions,
-               order_column=order_column,
-               order_direction=order_direction,
-               primary_only=primary_only,
-               logic=logic)
 
 
 def _lower_optional(x):
