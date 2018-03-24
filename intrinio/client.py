@@ -46,7 +46,7 @@ def get(endpoint, **parameters):
 
     while True:
         page = get_page(endpoint, page_number, **parameters)
-        dataset = pd.concat([dataset, page])
+        dataset = pd.concat([dataset, page], ignore_index=True)
 
         if len(page) == 0 or page_number == page.total_pages:
             return dataset
@@ -158,7 +158,7 @@ def _web_request_cached(url, parameters):
 
     if not os.path.exists(cache_directory):
         os.makedirs(cache_directory)
-    
+
     with codecs.open(cache_file_path, 'w', 'utf-8') as cached_response:
         cached_response.write(response)
 
