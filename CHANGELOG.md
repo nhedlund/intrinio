@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 - 2018-03-24
+
+* Fix sequence based indexes for multi-page queries
+
 ## 0.2.0 - 2018-02-01
 
 * Add stock screener endpoint: screener
