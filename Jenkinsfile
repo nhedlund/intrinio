@@ -5,6 +5,7 @@ pipeline {
       args '-v $HOME/.cache/intrinio:/root/.cache/intrinio'
     }
   }
+
   stages {
     stage('Build') {
       steps {
@@ -19,6 +20,12 @@ pipeline {
       steps {
         sh './bin/runtests'
       }
+    }
+  }
+
+  post {
+    always {
+      junit 'tmp/**/*.xml'
     }
   }
 }
