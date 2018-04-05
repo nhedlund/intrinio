@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh '.bin/runtests'
+        sh './bin/runtests'
       }
     }
   }
