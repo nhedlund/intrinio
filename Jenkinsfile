@@ -12,6 +12,10 @@ pipeline {
       }
     }
     stage('Test') {
+      environment {
+        INTRINIO_USERNAME = credentials('intrinio-username')
+        INTRINIO_PASSWORD = credentials('intrinio-password')
+      }
       steps {
         sh './bin/runtests'
       }
