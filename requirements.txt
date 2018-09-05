@@ -7,5 +7,5 @@ pytest-watch==4.2.0
 tox==3.0.0
 detox==0.12
 pypandoc==1.4
-rope==0.10.7
+rope==0.11.0
 twine==1.11.0
