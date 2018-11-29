@@ -1,4 +1,4 @@
-requests==2.18.4
+requests==2.20.0
 pandas==0.23.0
 
 pytest==3.6.1
