@@ -148,13 +148,14 @@ def financials(identifier, type='FY', statement='calculations'):
         period = financials_period(identifier, fiscal_year, fiscal_period,
                                    statement)
 
+
         if type == 'TTM' and fiscal_period == 'FY':
             period.index = pd.MultiIndex.from_tuples([(fiscal_year, 'Q4TTM')],
                                                      names=['year', 'period'])
         if r is None:
             r = period
         else:
-            r = pd.concat([r, period])
+            r = pd.concat([r, period], sort=False)
 
     r = r.sort_index()
     return r
@@ -203,6 +204,9 @@ def financials_period(identifier, fiscal_year, fiscal_period='FY',
 
     if fiscal_period == 'FY':
         r.index.name = 'year'
+
+    # Remove duplicate columns from Intrinio
+    r = r.loc[:, ~r.columns.duplicated()]
 
     return r
 
