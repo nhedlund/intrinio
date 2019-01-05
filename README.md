@@ -2,8 +2,13 @@
 
 [![Build Status](https://travis-ci.org/nhedlund/intrinio.svg?branch=master)](https://travis-ci.org/nhedlund/intrinio)
 
-Unofficial Intrinio API client for Python.
+Unofficial Intrinio API V1 client for Python.
 It gives easy access to financial data.
+
+**OBS: This package targets Intrinio API V1. Now that they have released an
+official Python package and at the same time released a new incompatible API V2
+I recommend using the their official Python package available
+here: https://github.com/intrinio/python-sdk**
 
 ## Setup
 
