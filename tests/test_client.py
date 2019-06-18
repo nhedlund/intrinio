@@ -55,12 +55,12 @@ def test_get_missing_endpoint():
 
 
 def test_query_search_engine():
-    response = _web_request('https://duckduckgo.com', {'q': 'summer'})
+    response = _web_request('https://bing.com/search', {'q': 'summer'})
     assert 'summer' in response
 
 
 def test_query_search_engine_cached():
-    response = _web_request_cached('https://duckduckgo.com', {'q': 'summer'})
+    response = _web_request_cached('https://bing.com/search', {'q': 'summer'})
     assert 'summer' in response
 
 
