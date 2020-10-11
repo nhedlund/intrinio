@@ -1,7 +1,5 @@
 # intrinio
 
-[![Build Status](https://travis-ci.org/nhedlund/intrinio.svg?branch=master)](https://travis-ci.org/nhedlund/intrinio)
-
 [![Build Status](https://dev.azure.com/orisoft/intrinio/_apis/build/status/intrinio-Python%20package-CI)](https://dev.azure.com/orisoft/intrinio/_build/latest?definitionId=3)
 
 Unofficial Intrinio API V1 client for Python.
